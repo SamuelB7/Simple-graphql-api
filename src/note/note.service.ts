@@ -7,23 +7,42 @@ import { UpdateNoteInput } from './dto/update-note.input';
 export class NoteService {
   constructor (private prismaService: PrismaService) {}
 
-  create(createNoteInput: CreateNoteInput) {
-    return 'This action adds a new note';
+  async create(createNoteInput: CreateNoteInput) {
+    return await this.prismaService.note.create({
+      data: {
+        title: createNoteInput.title,
+        content: createNoteInput.content,
+        user_id: createNoteInput.user_id
+      }
+    });
   }
 
   findAll() {
-    return `This action returns all note`;
+    return this.prismaService.note.findMany({
+      include: { user: true }
+    });
   }
 
   findOne(id: number) {
-    return `This action returns a #${id} note`;
+    return this.prismaService.note.findUnique({
+      where: { id },
+      include: { user: true }
+    });
   }
 
-  update(id: number, updateNoteInput: UpdateNoteInput) {
-    return `This action updates a #${id} note`;
+  async update(id: number, updateNoteInput: UpdateNoteInput) {
+    return await this.prismaService.note.update({
+      where: { id },
+      data: {
+        title: updateNoteInput.title,
+        content: updateNoteInput.content
+      }
+    });
   }
 
   remove(id: number) {
-    return `This action removes a #${id} note`;
+    return this.prismaService.note.delete({
+      where: { id }
+    });
   }
 }
