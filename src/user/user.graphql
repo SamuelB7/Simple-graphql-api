@@ -1,20 +1,21 @@
 type User {
   id: Int!
   name: String
-  email: String,
+  email: String
   password: String
+  notes: [Note]
 }
 
 input CreateUserInput {
-  name: String
-  email: String,
-  password: String
+  name: String!
+  email: String!
+  password: String!
 }
 
 input UpdateUserInput {
   id: Int!
   name: String
-  email: String,
+  email: String
   password: String
 }
 

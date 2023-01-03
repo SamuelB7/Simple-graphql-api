@@ -8,6 +8,7 @@ import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { ApolloServerPluginLandingPageLocalDefault } from 'apollo-server-core';
 import { join } from 'path';
 import { UserModule } from './user/user.module';
+import { NoteModule } from './note/note.module';
 
 @Module({
   imports: [
@@ -22,7 +23,8 @@ import { UserModule } from './user/user.module';
       }
     }),
     PrismaModule,
-    UserModule
+    UserModule,
+    NoteModule
   ],
   controllers: [AppController],
   providers: [AppService, PrismaService],
